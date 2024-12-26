@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homeowner Account Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f5f5f5;
+            perspective: 1000px; /* Add perspective for 3D effect */
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        nav a:hover {
+            color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        .form-container {
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            transform-style: preserve-3d;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            transform: perspective(800px) rotateY(10deg);
+            animation: slideIn 1s ease-out;
+        }
+        /* Animation for header text */
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%) rotateY(45deg);
+            }
+            to {
+                transform: translateX(0) rotateY(0deg);
+            }
+        }
+        input, textarea {
+            padding: 10px;
+            font-size: 16px;
+            width: 80%;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        input:focus, textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 5px 15px rgba(0, 128, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-size: 16px;
+            color: #333;
+        }
+        .cta-button {
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            transform-style: preserve-3d;
+        }
+        .cta-button:hover {
+            background-color: #388E3C;
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        .cta-button:active {
+            transform: translateY(0) rotateX(-10deg);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://via.placeholder.com/150x50?text=Hamro+Hotel+Logo" alt="Hamro Hotel Logo">
+        <h1>Homeowner Account</h1>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </header>
+
+    <!-- Property Details Form -->
+    <div class="form-container">
+        <h2>Enter Property Details</h2>
+        <form action="/submit-property" method="POST" enctype="multipart/form-data">
+            <input type="text" name="homeowner-name" placeholder="Your Full Name" required><br>
+            <input type="text" name="property-name" placeholder="Property Name" required><br>
+            <textarea name="property-description" placeholder="Describe your property" rows="5" required></textarea><br>
+            <label for="property-images">Upload Property Images:</label><br>
+            <input type="file" name="property-images" accept="image/*" multiple required><br><br>
+            <button type="submit" class="cta-button">Submit Property</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hamro Hotel. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

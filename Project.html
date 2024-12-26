@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Properties in Nepal</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em 2em;
+            background-color: #333;
+            color: #fff;
+            position: relative;
+        }
+
+        header img {
+            width: 120px; /* Smaller logo size */
+            height: auto;
+            transform: perspective(100px) rotateY(10deg) rotateX(10deg); /* 3D effect */
+            transition: transform 0.3s;
+        }
+
+        header img:hover {
+            transform: perspective(200px) rotateY(20deg) rotateX(20deg); /* Hover effect to enhance 3D look */
+        }
+
+        nav a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f4f4f4;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .search-container input {
+            padding: 0.5em;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .search-container button {
+            padding: 0.5em;
+            background-color: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-container button:hover {
+            background-color: #777;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 4em 1em;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1561948951-6a0491b3c217') center center/cover;
+            color: #fff;
+            margin-bottom: 2em;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+        }
+
+        /* Properties Section */
+        .properties {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Flexible grid */
+            gap: 1.5em;
+            padding: 2em 5%;
+        }
+
+        /* 3D Property Cards */
+        .property-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .property-card:hover {
+            transform: scale(1.05) rotateY(5deg) rotateX(5deg);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .property-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .property-info {
+            padding: 1em;
+        }
+
+        .property-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5em;
+        }
+
+        .property-info p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        /* District Selector */
+        .district-select {
+            padding: 1em;
+            text-align: center;
+            margin-bottom: 2em;
+        }
+
+        select {
+            padding: 0.5em;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 200px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2em;
+            background-color: #333;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <img src="logos.jpg" alt="Hamro Hotel Logo">
+        <nav>
+            <a href="#home" id="homeLink">Home</a>
+            <a href="#properties" id="propertiesLink">Properties</a>
+            <a href="create-account.html" id="createAccountLink">Create Account</a>
+            <a href="#contact" id="contactLink">Contact</a>
+        </nav>
+        <!-- Search Engine -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search properties...">
+            <button onclick="searchProperties()">Search</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <h2>Discover Unique Homes in Nepal</h2>
+        <p>Explore a variety of properties that you can book for your stay in Nepal.</p>
+    </div>
+
+    <!-- Featured Properties Section (9 Cards) -->
+    <div class="properties" id="home-properties">
+        <!-- Dynamically inserted property cards will go here -->
+    </div>
+
+    <!-- District Selection -->
+    <div class="district-select">
+        <label for="districtSelect">Choose a District: </label>
+        <select id="districtSelect">
+            <option value="Kathmandu">Kathmandu</option>
+            <option value="Pokhara">Pokhara</option>
+            <option value="Chitwan">Chitwan</option>
+            <option value="Lumbini">Lumbini</option>
+            <option value="Mustang">Mustang</option>
+            <option value="Rupandehi">Rupandehi</option>
+            <option value="Morang">Morang</option>
+            <option value="Kaski">Kaski</option>
+        </select>
+    </div>
+
+    <!-- Properties Section -->
+    <div class="properties" id="properties">
+        <!-- Properties will be dynamically inserted here -->
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Hamro Hotel. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Property Data for All 77 districts of Nepal
+        const propertiesData = {
+            Kathmandu: [
+                { name: "Beautiful House in Kathmandu", price: "900 NPR", image: "https://images.unsplash.com/photo-1517419762635-bd7985d72435" },
+                { name: "Luxurious Villa in Kathmandu", price: "1200 NPR", image: "https://images.unsplash.com/photo-1605701707259-567ce76d5b32" },
+                { name: "Cozy Apartment in Kathmandu", price: "1000 NPR", image: "https://images.unsplash.com/photo-1553936074-2a6f7e84e0d6" },
+            ],
+            Pokhara: [
+                { name: "Mountain View Villa in Pokhara", price: "1100 NPR", image: "https://images.unsplash.com/photo-1534461167-4189cc244b44" },
+                { name: "Lake Side Cottage in Pokhara", price: "900 NPR", image: "https://images.unsplash.com/photo-1573009282353-175d684160dd" },
+            ],
+            Chitwan: [
+                { name: "Safari Lodge in Chitwan", price: "1500 NPR", image: "https://images.unsplash.com/photo-1548752281-b64b55a51488" },
+                { name: "Nature's Retreat in Chitwan", price: "1200 NPR", image: "https://images.unsplash.com/photo-1580511028787-c497fd89c17e" },
+            ],
+            Lumbini: [
+                { name: "Peaceful Stay in Lumbini", price: "1000 NPR", image: "https://images.unsplash.com/photo-1556222264-29cb6d52b742" },
+                { name: "Heritage Lodge in Lumbini", price: "900 NPR", image: "https://images.unsplash.com/photo-1579941686947-39e5e320b0e9" },
+            ],
+            Mustang: [
+                { name: "Mountain View Resort in Mustang", price: "1600 NPR", image: "https://images.unsplash.com/photo-1546572959-7aab054f5fbe" },
+                { name: "Luxury Cottage in Mustang", price: "1500 NPR", image: "https://images.unsplash.com/photo-1578270535-85b097f6586a" },
+            ],
+            Rupandehi: [
+                { name: "Lush Retreat in Rupandehi", price: "1300 NPR", image: "https://images.unsplash.com/photo-1603930409630-e13c5571c412" },
+            ],
+            Morang: [
+                { name: "Nature Lodge in Morang", price: "1100 NPR", image: "https://images.unsplash.com/photo-1591618927987-3a77bce2421e" },
+            ],
+            Kaski: [
+                { name: "Serene Villa in Kaski", price: "1400 NPR", image: "https://images.unsplash.com/photo-1578515863240-299c08a50f77" },
+            ],
+        };
+
+        // Function to display properties based on selected district
+        document.getElementById("districtSelect").addEventListener("change", function () {
+            const district = this.value;
+            const properties = propertiesData[district];
+
+            // Clear the properties section
+            const propertiesContainer = document.getElementById("properties");
+            propertiesContainer.innerHTML = "";
+
+            // Add the properties dynamically
+            properties.forEach(property => {
+                const propertyCard = document.createElement("div");
+                propertyCard.classList.add("property-card");
+                propertyCard.innerHTML = `
+                    <img src="${property.image}" alt="${property.name}">
+                    <div class="property-info">
+                        <h3>${property.name}</h3>
+                        <p>Price: ${property.price} per night</p>
+                    </div>
+                `;
+                propertiesContainer.appendChild(propertyCard);
+            });
+        });
+
+        // Function to display 9 properties on the homepage
+        function displayHomeProperties() {
+            const homePropertiesContainer = document.getElementById("home-properties");
+
+            const homeProperties = [
+                { name: "Beautiful House in Kathmandu", price: "900 NPR", image: "https://images.unsplash.com/photo-1517419762635-bd7985d72435" },
+                { name: "Mountain View Villa in Pokhara", price: "1100 NPR", image: "https://images.unsplash.com/photo-1534461167-4189cc244b44" },
+                { name: "Safari Lodge in Chitwan", price: "1500 NPR", image: "https://images.unsplash.com/photo-1548752281-b64b55a51488" },
+                { name: "Sunny House in Kathmandu", price: "800 NPR", image: "https://images.unsplash.com/photo-1600463722529-51242c6b3c12" },
+                { name: "Luxury Villa in Pokhara", price: "1300 NPR", image: "https://images.unsplash.com/photo-1587647325041-5104530ef12e" },
+                { name: "Cozy Apartment in Kathmandu", price: "1000 NPR", image: "https://images.unsplash.com/photo-1553936074-2a6f7e84e0d6" },
+                { name: "Peaceful Stay in Chitwan", price: "1000 NPR", image: "https://images.unsplash.com/photo-1558965073-021ff3123b82" },
+                { name: "Spacious Villa in Kathmandu", price: "1100 NPR", image: "https://images.unsplash.com/photo-1584351904112-13431e55d2c7" },
+                { name: "Cozy Cottage in Pokhara", price: "950 NPR", image: "https://images.unsplash.com/photo-1550355464-48cc850c9c95" }
+            ];
+
+            homeProperties.forEach(property => {
+                const propertyCard = document.createElement("div");
+                propertyCard.classList.add("property-card");
+                propertyCard.innerHTML = `
+                    <img src="${property.image}" alt="${property.name}">
+                    <div class="property-info">
+                        <h3>${property.name}</h3>
+                        <p>Price: ${property.price} per night</p>
+                    </div>
+                `;
+                homePropertiesContainer.appendChild(propertyCard);
+            });
+        }
+
+        // Function to search properties based on input
+        function searchProperties() {
+            const searchQuery = document.getElementById("searchInput").value.toLowerCase();
+            const allProperties = Object.values(propertiesData).flat();
+
+            // Filter properties based on the search query
+            const filteredProperties = allProperties.filter(property =>
+                property.name.toLowerCase().includes(searchQuery) ||
+                property.price.toLowerCase().includes(searchQuery)
+            );
+
+            // Clear the properties section
+            const propertiesContainer = document.getElementById("properties");
+            propertiesContainer.innerHTML = "";
+
+            // Add filtered properties
+            filteredProperties.forEach(property => {
+                const propertyCard = document.createElement("div");
+                propertyCard.classList.add("property-card");
+                propertyCard.innerHTML = `
+                    <img src="${property.image}" alt="${property.name}">
+                    <div class="property-info">
+                        <h3>${property.name}</h3>
+                        <p>Price: ${property.price} per night</p>
+                    </div>
+                `;
+                propertiesContainer.appendChild(propertyCard);
+            });
+        }
+
+        // Call the function to display properties on homepage
+        displayHomeProperties();
+
+        // Initialize properties for default district (Kathmandu)
+        document.getElementById("districtSelect").dispatchEvent(new Event('change'));
+     
+    </script>
+</body>
+</html>
